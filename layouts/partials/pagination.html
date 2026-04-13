@@ -1,0 +1,30 @@
+{{ $paginator := .Paginator }}
+{{ if gt $paginator.TotalPages 1 }}
+<nav aria-label="Pagination" class="mt-12 flex items-center justify-center">
+  <div class="surface inline-flex flex-wrap items-center justify-center gap-2 p-3">
+    {{ if $paginator.HasPrev }}
+    <a href="{{ $paginator.Prev.URL }}" class="ui-button-secondary !px-4 !py-2 text-sm">Previous</a>
+    {{ else }}
+    <span class="ui-button-secondary !cursor-not-allowed !px-4 !py-2 text-sm opacity-50">Previous</span>
+    {{ end }}
+
+    {{ range $paginator.Pagers }}
+      {{ if eq .PageNumber $paginator.PageNumber }}
+      <span aria-current="page" class="inline-flex min-w-10 items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20">
+        {{ .PageNumber }}
+      </span>
+      {{ else }}
+      <a href="{{ .URL }}" class="ui-button-secondary !min-w-10 !px-4 !py-2 text-sm">
+        {{ .PageNumber }}
+      </a>
+      {{ end }}
+    {{ end }}
+
+    {{ if $paginator.HasNext }}
+    <a href="{{ $paginator.Next.URL }}" class="ui-button-secondary !px-4 !py-2 text-sm">Next</a>
+    {{ else }}
+    <span class="ui-button-secondary !cursor-not-allowed !px-4 !py-2 text-sm opacity-50">Next</span>
+    {{ end }}
+  </div>
+</nav>
+{{ end }}

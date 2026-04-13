@@ -1,0 +1,42 @@
+<svg version="1.1" viewBox="0 0 145 145" xmlns="http://www.w3.org/2000/svg">
+    <rect width="145" height="145" fill="#0F172A" />
+
+    <path d="M25 145c5-25 20-35 47.5-35s42.5 10 47.5 35H25z" fill="#334155" />
+
+    <path d="M72.5 110l-10 8h20z" fill="#FFFFFF" />
+    <path d="M72.5 110l-4 12 4 23 4-23z" fill="#3B82F6" /> <path
+        d="M52 58c0-18 10-28 20.5-28s20.5 10 20.5 28c0 18-9 32-20.5 32S52 76 52 58z"
+        fill="#F8FAFC"
+    />
+
+    <path
+        d="M52 52c0-15 10-22 20.5-22s20.5 7 20.5 22c0-10-8-15-20.5-15S52 42 52 52z"
+        fill="#1E293B"
+    />
+
+    <rect
+        x="60"
+        y="58"
+        width="6"
+        height="2"
+        rx="1"
+        fill="#3B82F6"
+        opacity="0.8"
+    />
+    <rect
+        x="79"
+        y="58"
+        width="6"
+        height="2"
+        rx="1"
+        fill="#3B82F6"
+        opacity="0.8"
+    />
+
+    <path
+        d="M72.5 82v8"
+        stroke="#CBD5E1"
+        stroke-width="1"
+        stroke-linecap="round"
+    />
+</svg>

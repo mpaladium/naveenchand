@@ -1,0 +1,54 @@
+{{ if .Site.Params.about.enable | default false }}
+{{- $about := .Site.Language.Params.about | default .Site.Params.about -}}
+{{- $showAboutImage := and (.Site.Params.about.showImage | default false) .Site.Params.about.image -}}
+<section id="about" class="section-wrap">
+  <div class="container-shell">
+    <div class="section-heading">
+      <span class="section-kicker">About</span>
+      <h2 class="section-title">{{ $about.title | default (i18n "about") }}</h2>
+    </div>
+    <div class="grid gap-8 {{ if $showAboutImage }}lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)]{{ else }}lg:grid-cols-1{{ end }}">
+      {{ if $showAboutImage }}
+      <div class="surface p-4">
+        <img src="{{ .Site.Params.about.image }}" alt="{{ .Site.Params.title }} profile picture" class="aspect-square w-full rounded-[2rem] object-cover">
+      </div>
+      {{ end }}
+      <div class="surface p-6 sm:p-8">
+        <div class="content-prose">{{ partial "utils/markdown-content.html" $about.content }}</div>
+        {{ if .Site.Params.about.skills.enable }}
+        <div class="mt-8">
+          <h3 class="text-xl font-semibold">{{ $about.skills.title | default .Site.Params.about.skills.title }}</h3>
+          {{ if $about.skills.categories }}
+          <div class="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {{ range $about.skills.categories }}
+            <div class="surface-muted rounded-[1.5rem] border border-border/60 bg-background/60 p-5">
+              <div class="text-sm font-semibold">{{ .name }}</div>
+              <div class="mt-4 space-y-3">
+                {{ range .items }}
+                {{- $rating := .rating | default 70 -}}
+                <div class="grid grid-cols-[minmax(0,1fr)_68px] items-center gap-3">
+                  <div class="text-sm text-foreground">{{ .name }}</div>
+                  <div class="text-right text-xs text-muted-foreground">{{ .label | default (printf "%d%%" $rating) }}</div>
+                  <div class="col-span-2 h-2 overflow-hidden rounded-full bg-muted">
+                    <div class="h-full rounded-full bg-primary" style="width: {{ $rating }}%"></div>
+                  </div>
+                </div>
+                {{ end }}
+              </div>
+            </div>
+            {{ end }}
+          </div>
+          {{ else }}
+          <div class="mt-4 flex flex-wrap gap-2">
+            {{ range .Site.Params.about.skills.items }}
+            <span class="ui-pill">{{ partial "utils/markdown-content.html" . }}</span>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

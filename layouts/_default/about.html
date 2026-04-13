@@ -1,0 +1,36 @@
+{{ define "head" }}
+<meta name="description" content="{{ .Params.description }}">
+<script defer src="{{ (printf "%sfontawesome-6/all-6.4.2.js" (.Site.Params.staticPath | default "")) | relURL }}"></script>
+{{ end }}
+
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<section class="section-wrap">
+  <div class="container-shell">
+    <div class="grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)]">
+      {{ if .Params.image }}
+      <aside class="surface p-6">
+        <img src="{{ .Params.image }}" alt="{{ .Params.name }}" class="aspect-square w-full rounded-[2rem] object-cover">
+        <h1 class="mt-5 text-2xl font-semibold">{{ .Params.name }}</h1>
+        <div class="mt-5 flex flex-wrap gap-3 text-lg">
+          {{ range .Params.socialLinks.fontAwesomeIcons }}
+          <a href="{{ .url }}" target="_blank" class="ui-button-secondary !size-11 !p-0"><i class="{{ .icon }}"></i></a>
+          {{ end }}
+          {{ range .Params.socialLinks.customIcons }}
+          <a href="{{ .url }}" target="_blank" class="ui-button-secondary !size-11 !p-0"><img src="{{ .icon }}" alt="" class="h-5 w-5"></a>
+          {{ end }}
+        </div>
+      </aside>
+      {{ end }}
+      <article class="surface p-6 sm:p-8">
+        <div class="section-heading !mb-8 !text-left">
+          <span class="section-kicker">Profile</span>
+          <h1 class="section-title">{{ .Title }}</h1>
+        </div>
+        <div class="content-prose">{{ .Content | emojify }}</div>
+      </article>
+    </div>
+  </div>
+</section>
+{{ end }}

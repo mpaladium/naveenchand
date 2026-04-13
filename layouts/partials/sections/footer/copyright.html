@@ -1,0 +1,13 @@
+<div class="container-shell">
+  <div class="text-center text-sm text-muted-foreground">
+    {{ if and (.Site.Params.footer.showLogo | default false) (or .Site.Params.navbar.brandLogo .Site.Params.favicon) }}
+    <a href="{{ .Site.BaseURL }}" title="{{ .Site.Title }}" class="mb-4 inline-flex size-12 items-center justify-center rounded-2xl border border-border bg-card/70">
+      <img alt="Footer logo" src="{{ .Site.Params.navbar.brandLogo | default .Site.Params.favicon }}" class="h-8 w-8 rounded-xl object-cover">
+    </a>
+    {{ end }}
+    <p>&copy; {{ now.Format "2006" }} {{ .Site.Params.copyright }} {{ .Site.Params.terms.copyright | default (i18n "copyright") }}</p>
+    {{ if .Site.Params.footer.showBuiltWith | default false }}
+    <p class="mt-2">Built with Hugo and a Tailwind + shadcn-inspired design system.</p>
+    {{ end }}
+  </div>
+</div>

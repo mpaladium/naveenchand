@@ -1,0 +1,68 @@
+{{ if .Site.Params.projects.enable | default false }}
+{{- $projects := .Site.Language.Params.projects | default .Site.Params.projects -}}
+<section id="projects" class="section-wrap">
+  <div class="container-shell">
+    <div class="section-heading">
+      <span class="section-kicker">Selected Work</span>
+      <h2 class="section-title">{{ $projects.title | default .Site.Params.projects.title | default (i18n "projects") }}</h2>
+      <p class="section-copy">{{ $projects.description | default "Shadcn-like cards, cleaner content rhythm, and a more product-focused presentation layer." }}</p>
+    </div>
+    {{ if $projects.markdown }}
+    <div class="surface p-6 sm:p-8">
+      <div class="content-prose">{{ partial "utils/markdown-content.html" $projects.markdown }}</div>
+    </div>
+    {{ else }}
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {{ range $projects.items | default .Site.Params.projects.items }}
+      <article class="surface overflow-hidden">
+        <div class="overflow-hidden">
+          <img class="aspect-[16/10] w-full object-cover transition-transform duration-500 hover:scale-105" src="{{ .image }}" alt="{{ .title }}">
+        </div>
+        <div class="space-y-4 p-6">
+          <div class="flex flex-wrap gap-2">
+            {{ range .badges }}<span class="ui-pill">{{ . }}</span>{{ end }}
+          </div>
+          <h3 class="text-2xl font-semibold">{{ .title }}</h3>
+          <p class="text-sm leading-7 text-muted-foreground">{{ .content }}</p>
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+            <div class="flex flex-wrap gap-2">
+              {{ range .links }}
+              <a href="{{ .url }}" target="_blank" class="ui-button-secondary !size-10 !p-0"><i class="{{ .icon }}"></i></a>
+              {{ end }}
+            </div>
+            {{ if .featured }}
+            <a class="ui-button" href="{{ .featured.link }}" target="_blank">{{ .featured.name }}</a>
+            {{ end }}
+          </div>
+        </div>
+      </article>
+      {{ end }}
+      {{ range ( where .Site.RegularPages "Type" "projects" ) }}
+      {{ if .Params.showInHome | default true }}
+      <article class="surface overflow-hidden">
+        <div class="overflow-hidden">
+          <img class="aspect-[16/10] w-full object-cover transition-transform duration-500 hover:scale-105" src="{{ .Params.image }}" alt="{{ .Title }}">
+        </div>
+        <div class="space-y-4 p-6">
+          <div class="flex flex-wrap gap-2">
+            {{ range .Params.badges }}<span class="ui-pill">{{ . }}</span>{{ end }}
+          </div>
+          <h3 class="text-2xl font-semibold">{{ .Title | truncate 50 }}</h3>
+          <p class="text-sm leading-7 text-muted-foreground">{{ .Summary | truncate 100 | safeHTML }}</p>
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+            <div class="flex flex-wrap gap-2">
+              {{ range .Params.links }}
+              <a href="{{ .url }}" class="ui-button-secondary !size-10 !p-0"><i class="{{ .icon }}"></i></a>
+              {{ end }}
+            </div>
+            <a class="ui-button" href="{{ .RelPermalink }}">Know More</a>
+          </div>
+        </div>
+      </article>
+      {{ end }}
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

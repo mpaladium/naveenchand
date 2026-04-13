@@ -1,0 +1,29 @@
+{{- /*
+Renders markdown content that can optionally be sourced from an external file.
+
+Supported forms:
+- "Some **markdown**" (string)
+- "@data/markdown/en/about.md" (string; leading "@" means read that file)
+- { file: "data/markdown/en/about.md" } (map)
+*/ -}}
+
+{{- $value := . -}}
+
+{{- if reflect.IsMap $value -}}
+  {{- with (index $value "file") -}}
+    {{- readFile . | markdownify -}}
+  {{- else -}}
+    {{- with (index $value "content") -}}
+      {{- . | markdownify -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if eq (printf "%T" $value) "string" -}}
+  {{- $s := $value -}}
+  {{- if hasPrefix $s "@" -}}
+    {{- readFile (strings.TrimPrefix "@" $s) | markdownify -}}
+  {{- else -}}
+    {{- $s | markdownify -}}
+  {{- end -}}
+{{- else -}}
+  {{- $value | markdownify -}}
+{{- end -}}

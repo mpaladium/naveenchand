@@ -1,0 +1,23 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<link rel="icon" href="{{ (.Site.Params.favicon | default "fav.png") | strings.TrimPrefix "/" | relURL }}" type="image/gif">
+
+{{ template "_internal/google_analytics.html" . }}
+{{ template "_internal/opengraph.html" . }}
+{{ template "_internal/twitter_cards.html" . }}
+
+{{ if hugo.IsMultilingual }}
+  {{ range .AllTranslations }}
+    <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" title="{{ .Language.LanguageName }}">
+  {{ end }}
+  <meta property="og:locale" content="{{ .Language.Lang }}">
+  {{ range .Translations }}
+    <meta property="og:locale:alternate" content="{{ .Language.Lang }}">
+  {{ end }}
+{{ end }}
+
+<link rel="stylesheet" href="{{ (printf "%scss/tailwind.css" (.Site.Params.staticPath | default "")) | relURL }}" media="all">
+
+{{ partial "head/extensions.html" . }}

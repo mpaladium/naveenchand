@@ -1,0 +1,39 @@
+{{ define "head" }}
+<meta name="description" content="{{ .Title }} of {{ .Site.Title }}">
+{{ if .Params.viewer | default true }}
+<link rel="stylesheet" href="{{ (printf "%sviewer/viewer.min.css" (.Site.Params.staticPath | default "")) | relURL }}">
+<script src="{{ (printf "%sviewer/viewer.min.js" (.Site.Params.staticPath | default "")) | relURL }}"></script>
+{{ end }}
+{{ end }}
+
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<section class="section-wrap">
+  <div class="container-shell">
+    <div id="gallery-page" class="surface p-6 sm:p-8">
+      <div class="section-heading">
+        <span class="section-kicker">Gallery</span>
+        <h1 class="section-title">{{ .Title }}</h1>
+        <p class="section-copy">{{ .Params.description | emojify }}</p>
+      </div>
+      <div class="content-prose mx-auto max-w-3xl text-center">{{ .Content | emojify }}</div>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {{ range .Params.galleryImages }}
+        <div class="overflow-hidden rounded-[1.75rem] border border-border bg-card">
+          <img class="viewer-enabled-image aspect-[4/3] w-full object-cover transition-transform duration-500 hover:scale-105" src="{{ .src }}" alt="">
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ if .Params.viewer | default true }}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Viewer(document.getElementById("gallery-page"),
+      {...{{ .Params.viewerOptions }} }); });
+</script>
+{{ end }}
+{{ end }}

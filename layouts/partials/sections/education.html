@@ -1,0 +1,43 @@
+{{ if .Site.Params.education.enable | default false }}
+{{- $education := .Site.Language.Params.education | default .Site.Params.education -}}
+<section id="education" class="section-wrap">
+  <div class="container-shell">
+    <div class="section-heading">
+      <span class="section-kicker">Education</span>
+      <h2 class="section-title">{{ $education.title | default .Site.Params.education.title | default (i18n "education") }}</h2>
+    </div>
+    {{ if $education.markdown }}
+    <div class="surface p-6 sm:p-8">
+      <div class="content-prose">{{ partial "utils/markdown-content.html" $education.markdown }}</div>
+    </div>
+    {{ else }}
+    <div class="grid gap-6 lg:grid-cols-2">
+      {{ range $index, $element := $education.items | default .Site.Params.education.items }}
+      <div class="surface p-6 sm:p-8">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h3 class="text-2xl font-semibold">{{ .title }}</h3>
+            {{ if .school.url }}
+            <a href="{{ .school.url }}" target="_blank" class="mt-1 inline-block text-primary hover:underline">{{ .school.name }}</a>
+            {{ else }}
+            <p class="mt-1 text-muted-foreground">{{ .school.name }}</p>
+            {{ end }}
+          </div>
+          {{ if .date }}<span class="ui-pill">{{ .date }}</span>{{ end }}
+        </div>
+        {{ if .GPA }}
+        <div class="mt-4 text-sm text-muted-foreground">GPA: <span class="font-medium text-foreground">{{ .GPA }}</span></div>
+        {{ end }}
+        <div class="content-prose mt-5">{{ partial "utils/markdown-content.html" .content }}</div>
+        {{ if .featuredLink.enable }}
+        <div class="mt-6">
+          <a href="{{ .featuredLink.url }}" class="ui-button">{{ .featuredLink.name | default "Featured" }}</a>
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

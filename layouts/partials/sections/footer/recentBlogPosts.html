@@ -1,0 +1,48 @@
+{{ $recentPostsPath := .Site.Params.footer.recentPosts.path | default "blogs" }}
+{{ $blogsSection := site.GetPage "section" $recentPostsPath }} {{
+$allSectionPosts := slice }} {{ if $blogsSection }}{{ $allSectionPosts =
+$blogsSection.RegularPages }}{{ end }} {{ $currentNumOfrecentPosts := len
+$allSectionPosts }} {{ if and (gt $currentNumOfrecentPosts 0)
+(.Site.Params.footer.recentPosts.enable | default false) }}
+<div class="container-shell mb-14">
+    {{ $recentPostsCount := .Site.Params.footer.recentPosts.count | default 3 }}
+    {{ $recentPosts := $allSectionPosts | first $recentPostsCount }}
+    <div class="section-heading">
+        <span class="section-kicker">Latest Notes</span>
+        <h2 class="section-title text-3xl sm:text-4xl">
+            {{ .Site.Params.footer.recentPosts.title | default (i18n
+            "recent_posts") }}
+        </h2>
+    </div>
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {{ range $recentPosts }}
+        <article class="surface overflow-hidden">
+            {{ if and (not (.Site.Params.footer.recentPosts.disableFeaturedImage
+            | default false)) (.Params.image) }}
+            <a href="{{ .RelPermalink }}" class="block overflow-hidden">
+                <img
+                    src="{{ .Params.image }}"
+                    alt="{{ .Title }}"
+                    class="aspect-[16/10] w-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+            </a>
+            {{ end }}
+            <div class="space-y-4 p-6">
+                <p class="text-sm text-muted-foreground">{{ .Date }}</p>
+                <a href="{{ .RelPermalink }}"
+                    ><h3 class="text-2xl font-semibold">
+                        {{ .Title | truncate 36 }}
+                    </h3></a
+                >
+                <p class="text-sm leading-7 text-muted-foreground">
+                    {{ .Summary | truncate 180 }}
+                </p>
+                <a href="{{ .RelPermalink }}" class="ui-button-secondary"
+                    >Read</a
+                >
+            </div>
+        </article>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

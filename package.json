@@ -1,0 +1,17 @@
+{
+  "name": "nav-portfolio",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/css/tailwind.css -o ./static/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./assets/css/tailwind.css -o ./static/css/tailwind.css --watch",
+    "serve:hugo": "hugo server",
+    "dev": "concurrently -k -n css,hugo -c cyan,green \"pnpm:watch:css\" \"pnpm:serve:hugo\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "three": "^0.160.1"
+  }
+}

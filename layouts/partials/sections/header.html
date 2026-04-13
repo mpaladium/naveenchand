@@ -1,0 +1,302 @@
+<script>
+    (function () {
+        const storedTheme = localStorage.getItem("pref-theme");
+        const prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+        ).matches;
+        if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
+            document.documentElement.classList.add("dark");
+            document.body.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+            document.body.classList.remove("dark");
+        }
+    })();
+</script>
+
+<header id="profileHeader" class="sticky top-0 z-40 px-3 pt-3 sm:px-6 lg:px-8">
+    <div class="container-shell">
+        <nav class="glass-nav">
+            <div class="flex items-center gap-3 px-4 py-3 sm:px-5">
+                <!--<a
+                    class="flex items-center gap-3"
+                    href="{{ .Site.Home.RelPermalink }}"
+                >
+                    <span
+                        class="flex size-10 items-center justify-center rounded-2xl bg-primary/10 text-primary"
+                    >
+                        {{ if and (or (.Site.Params.favicon)
+                        (.Site.Params.navbar.brandLogo))
+                        (.Site.Params.navbar.showBrandLogo | default true) }}
+                        <img
+                            src="{{ .Site.Params.navbar.brandLogo | default .Site.Params.favicon }}"
+                            alt="{{ .Site.Title }}"
+                            class="size-8 rounded-xl object-cover"
+                        />
+                        {{ else }}
+                        <span class="font-display text-lg font-bold">N</span>
+                        {{ end }}
+                    </span>
+                    <span
+                        class="font-display text-base font-semibold tracking-tight"
+                        >{{ .Site.Params.navbar.brandName | default
+                        .Site.Params.title }}</span
+                    >
+                </a>-->
+
+                {{ if not (.Site.Params.navbar.disableSearch | default false) }}
+                <div class="hidden flex-1 justify-center lg:flex">
+                    <input
+                        id="search"
+                        autocomplete="off"
+                        class="w-full max-w-sm rounded-full border border-input bg-background/70 px-4 py-2.5 text-sm outline-none ring-0 transition focus:border-primary"
+                        placeholder='{{ .Site.Params.navbar.searchPlaceholder | default (i18n "search_placeholder") }}'
+                        aria-label="Search"
+                        oninput="searchOnChange(event)"
+                    />
+                </div>
+                {{ end }}
+
+                <!--<div class="ml-auto flex items-center gap-2">
+                    {{ if hugo.IsMultilingual }}
+                    <div class="relative">
+                        <button
+                            id="language-toggle"
+                            type="button"
+                            aria-label="Toggle language menu"
+                            aria-expanded="false"
+                            class="inline-flex h-11 items-center gap-2 rounded-full border border-border bg-background/70 px-4 text-sm font-medium text-foreground transition hover:bg-accent"
+                        >
+                            <span>🌐</span>
+                            <span class="hidden sm:inline"
+                                >{{ .Language.LanguageName }}</span
+                            >
+                        </button>
+                        <div id="language-menu" class="lang-menu hidden">
+                            {{- $translations := .AllTranslations -}} {{- if eq
+                            (len $translations) 1 -}} {{- range
+                            site.Home.AllTranslations -}}
+                            <a
+                                class="lang-link{{ if eq .Language.Lang $.Language.Lang }} lang-link-active{{ end }}"
+                                href="{{ .RelPermalink }}"
+                                title="{{ .Language.LanguageName }}"
+                            >
+                                <span>{{ .Language.LanguageName }}</span>
+                                {{ if eq .Language.Lang $.Language.Lang
+                                }}<span>✓</span>{{ end }}
+                            </a>
+                            {{- end -}} {{- else -}} {{- range $translations -}}
+                            <a
+                                class="lang-link{{ if eq .Language.Lang $.Language.Lang }} lang-link-active{{ end }}"
+                                href="{{ .RelPermalink }}"
+                                title="{{ .Language.LanguageName }}"
+                            >
+                                <span>{{ .Language.LanguageName }}</span>
+                                {{ if eq .Language.Lang $.Language.Lang
+                                }}<span>✓</span>{{ end }}
+                            </a>
+                            {{- end -}} {{- end -}}
+                        </div>
+                    </div>
+                    {{ end }}
+
+                    <button
+                        id="theme-toggle"
+                        type="button"
+                        aria-label="Toggle dark mode"
+                        class="inline-flex size-11 items-center justify-center rounded-full border border-border bg-background/70 text-foreground transition hover:bg-accent"
+                    >
+                        <svg
+                            id="moon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="size-5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                            ></path>
+                        </svg>
+                        <svg
+                            id="sun"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="hidden size-5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <path d="M12 1v2"></path>
+                            <path d="M12 21v2"></path>
+                            <path d="M4.22 4.22l1.42 1.42"></path>
+                            <path d="M18.36 18.36l1.42 1.42"></path>
+                            <path d="M1 12h2"></path>
+                            <path d="M21 12h2"></path>
+                            <path d="M4.22 19.78l1.42-1.42"></path>
+                            <path d="M18.36 5.64l1.42-1.42"></path>
+                        </svg>
+                    </button>
+                    <button
+                        id="menu-toggle"
+                        type="button"
+                        aria-label="Toggle navigation"
+                        class="inline-flex size-11 items-center justify-center rounded-full border border-border bg-background/70 lg:hidden"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="size-5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M4 7h16"></path>
+                            <path d="M4 12h16"></path>
+                            <path d="M4 17h16"></path>
+                        </svg>
+                    </button>
+                </div>-->
+            </div>
+
+            <div
+                id="navbar-menu"
+                class="hidden border-t border-border/70 px-4 pb-4 pt-3 lg:block lg:border-t-0 lg:px-5 lg:pt-0"
+            >
+                {{ if not (.Site.Params.navbar.disableSearch | default false) }}
+                <div class="mb-3 lg:hidden">
+                    <input
+                        id="search"
+                        autocomplete="off"
+                        class="w-full rounded-full border border-input bg-background/70 px-4 py-2.5 text-sm outline-none transition focus:border-primary"
+                        placeholder='{{ .Site.Params.navbar.searchPlaceholder | default (i18n "search_placeholder") }}'
+                        aria-label="Search"
+                        oninput="searchOnChange(event)"
+                    />
+                </div>
+                {{ end }}
+                <div
+                    class="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-end"
+                >
+                    {{ if and (.Site.Params.about.enable | default false) (not
+                    (.Site.Params.navbar.menus.disableAbout | default false))
+                    }}<a
+                        class="nav-link"
+                        data-nav-link
+                        href="{{ .Site.Home.RelPermalink }}#about"
+                        >{{ .Site.Params.about.title | default (i18n
+                        "nav_about") }}</a
+                    >{{ end }} {{ if and (.Site.Params.experience.enable |
+                    default false) (not
+                    (.Site.Params.navbar.menus.disableExperience | default
+                    false)) }}<a
+                        class="nav-link"
+                        data-nav-link
+                        href="{{ .Site.Home.RelPermalink }}#experience"
+                        >{{ .Site.Params.experience.title | default (i18n
+                        "nav_experience") }}</a
+                    >{{ end }} {{ if and (.Site.Params.education.enable |
+                    default false) (not
+                    (.Site.Params.navbar.menus.disableEducation | default
+                    false)) }}<a
+                        class="nav-link"
+                        data-nav-link
+                        href="{{ .Site.Home.RelPermalink }}#education"
+                        >{{ .Site.Params.education.title | default (i18n
+                        "nav_education") }}</a
+                    >{{ end }} {{ if and (.Site.Params.projects.enable | default
+                    false) (not (.Site.Params.navbar.menus.disableProjects |
+                    default false)) }}<a
+                        class="nav-link"
+                        data-nav-link
+                        href="{{ .Site.Home.RelPermalink }}#projects"
+                        >{{ .Site.Params.projects.title | default (i18n
+                        "nav_projects") }}</a
+                    >{{ end }} {{ if and (.Site.Params.achievements.enable |
+                    default false) (not
+                    (.Site.Params.navbar.menus.disableAchievements | default
+                    false)) }}<a
+                        class="nav-link"
+                        data-nav-link
+                        href="{{ .Site.Home.RelPermalink }}#achievements"
+                        >{{ .Site.Params.achievements.title | default (i18n
+                        "nav_achievements") }}</a
+                    >{{ end }} {{ if and (.Site.Params.contact.enable | default
+                    false) (not (.Site.Params.navbar.menus.disableContact |
+                    default false)) }}<a
+                        class="nav-link"
+                        data-nav-link
+                        href="{{ .Site.Home.RelPermalink }}#contact"
+                        >{{ .Site.Params.contact.title | default (i18n
+                        "nav_contact") }}</a
+                    >{{ end }} {{ range .Site.Menus.main }} {{ if not
+                    .HasChildren }}
+                    <a class="nav-link" href="{{ .URL }}" title="{{ .Title }}"
+                        >{{ .Pre }}{{ .Name }}</a
+                    >
+                    {{ end }} {{ end }}
+                    <button
+                        id="theme-toggle"
+                        type="button"
+                        aria-label="Toggle dark mode"
+                        class="inline-flex size-11 items-center justify-center rounded-full border border-border bg-background/70 text-foreground transition hover:bg-accent"
+                    >
+                        <svg
+                            id="moon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="size-5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                            ></path>
+                        </svg>
+                        <svg
+                            id="sun"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="hidden size-5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <path d="M12 1v2"></path>
+                            <path d="M12 21v2"></path>
+                            <path d="M4.22 4.22l1.42 1.42"></path>
+                            <path d="M18.36 18.36l1.42 1.42"></path>
+                            <path d="M1 12h2"></path>
+                            <path d="M21 12h2"></path>
+                            <path d="M4.22 19.78l1.42-1.42"></path>
+                            <path d="M18.36 5.64l1.42-1.42"></path>
+                        </svg>
+                    </button>
+                    <button
+                        id="menu-toggle"
+                        type="button"
+                        aria-label="Toggle navigation"
+                        class="inline-flex size-11 items-center justify-center rounded-full border border-border bg-background/70 lg:hidden"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="size-5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M4 7h16"></path>
+                            <path d="M4 12h16"></path>
+                            <path d="M4 17h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>

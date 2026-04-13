@@ -1,0 +1,55 @@
+{{ if .Site.Params.experience.enable | default false }}
+{{- $experience := .Site.Language.Params.experience | default .Site.Params.experience -}}
+<section id="experience" class="section-wrap">
+  <div class="container-shell">
+    <div class="section-heading">
+      <span class="section-kicker">Experience</span>
+      <h2 class="section-title">{{ $experience.title | default .Site.Params.experience.title | default (i18n "experience") }}</h2>
+    </div>
+    {{ if $experience.markdown }}
+    <div class="surface p-6 sm:p-8">
+      <div class="content-prose">{{ partial "utils/markdown-content.html" $experience.markdown }}</div>
+    </div>
+    {{ else }}
+    <div class="space-y-6">
+      {{ range $experience.items | default .Site.Params.experience.items }}
+      <div class="surface p-6 sm:p-8">
+        <div class="flex flex-col gap-3 border-b border-border/70 pb-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h3 class="text-2xl font-semibold">{{ .company }}</h3>
+            {{ if .companyUrl }}<a href="{{ .companyUrl }}" target="_blank" class="mt-1 inline-block text-sm text-primary hover:underline">Visit company</a>{{ end }}
+          </div>
+        </div>
+        <div class="mt-6 space-y-6">
+          {{ range .jobs }}
+          <div class="grid gap-3 md:grid-cols-[minmax(0,1fr)_180px]">
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <h4 class="text-xl font-semibold">{{ .name }}</h4>
+                {{ if .info.content }}<span class="ui-pill">{{ .info.content }}</span>{{ end }}
+              </div>
+              <div class="content-prose mt-3">{{ partial "utils/markdown-content.html" .content }}</div>
+            </div>
+            <div class="space-y-3 text-sm text-muted-foreground md:text-right">
+              <div>{{ .date }}</div>
+              {{ if .featuredItems }}
+              <div class="flex flex-wrap gap-2 md:justify-end">
+                {{ range .featuredItems.fontAwesomeIcons }}
+                <a href="{{ .url }}" target="_blank" class="ui-button-secondary !size-10 !p-0" title="{{ .tooltip }}"><i class="{{ .icon }}"></i></a>
+                {{ end }}
+                {{ range .featuredItems.customIcons }}
+                <a href="{{ .url }}" target="_blank" class="ui-button-secondary !size-10 !p-0" title="{{ .tooltip }}"><img src="{{ .icon }}" alt="" class="h-5 w-5"></a>
+                {{ end }}
+              </div>
+              {{ end }}
+            </div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

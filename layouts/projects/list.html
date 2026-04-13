@@ -1,0 +1,41 @@
+{{ define "head" }}
+<meta name="description" content="{{ .Title }} of {{ .Site.Title }}">
+<script defer src="{{ (printf "%sfontawesome-6/all-6.4.2.js" (.Site.Params.staticPath | default "")) | relURL }}"></script>
+{{ end }}
+
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<section class="section-wrap">
+  <div class="container-shell">
+    <div class="section-heading">
+      <span class="section-kicker">Projects</span>
+      <h1 class="section-title">{{ .Title }}</h1>
+    </div>
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {{ range .Paginator.Pages }}
+      <article class="surface overflow-hidden">
+        {{ if .Params.image }}
+        <a href="{{ .RelPermalink }}" class="block overflow-hidden">
+          <img src="{{ .Params.image }}" alt="{{ .Title }}" class="aspect-[16/10] w-full object-cover transition-transform duration-500 hover:scale-105">
+        </a>
+        {{ end }}
+        <div class="space-y-4 p-6">
+          <div class="flex flex-wrap gap-2">
+            {{ range .Params.badges }}
+            <span class="ui-pill">{{ . }}</span>
+            {{ end }}
+          </div>
+          <a href="{{ .RelPermalink }}" class="block">
+            <h2 class="text-2xl font-semibold text-foreground">{{ .Title }}</h2>
+          </a>
+          <p class="text-sm leading-7 text-muted-foreground">{{ .Summary | truncate 220 | safeHTML }}</p>
+          <a href="{{ .RelPermalink }}" class="ui-button-secondary">Know More</a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    {{ partial "pagination.html" . }}
+  </div>
+</section>
+{{ end }}

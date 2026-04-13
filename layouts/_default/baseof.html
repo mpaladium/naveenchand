@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{ .Language.Lang }}">
+<head>
+  {{- partial "head.html" . -}}
+  {{- block "head" . }}{{- end }}
+  <title>{{- block "title" . }}{{- end }}</title>
+</head>
+<body class="bg-background text-foreground">
+  {{- partial "sections/header.html" . -}}
+  <div class="page-shell">
+    {{- block "main" . }}{{- end }}
+  </div>
+  {{- partial "sections/footer/index.html" . -}}
+  {{- partial "scripts.html" . -}}
+  <section id="search-content" class="fixed z-50 hidden max-h-[24rem] overflow-y-auto rounded-3xl border border-border bg-card/95 shadow-2xl backdrop-blur-xl">
+    <div class="w-full" id="search-results"></div>
+  </section>
+</body>
+</html>

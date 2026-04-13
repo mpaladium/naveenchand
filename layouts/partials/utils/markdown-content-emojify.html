@@ -1,0 +1,24 @@
+{{- /*
+Like utils/markdown-content.html, but runs emojify before markdownify.
+*/ -}}
+
+{{- $value := . -}}
+
+{{- if reflect.IsMap $value -}}
+  {{- with (index $value "file") -}}
+    {{- readFile . | emojify | markdownify -}}
+  {{- else -}}
+    {{- with (index $value "content") -}}
+      {{- . | emojify | markdownify -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if eq (printf "%T" $value) "string" -}}
+  {{- $s := $value -}}
+  {{- if hasPrefix $s "@" -}}
+    {{- readFile (strings.TrimPrefix "@" $s) | emojify | markdownify -}}
+  {{- else -}}
+    {{- $s | emojify | markdownify -}}
+  {{- end -}}
+{{- else -}}
+  {{- $value | emojify | markdownify -}}
+{{- end -}}

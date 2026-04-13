@@ -1,0 +1,16 @@
+{{- $user := .Get 0 -}}
+{{- $gistID := .Get 1 -}}
+{{- $file := .Get "file" | default "" -}}
+{{- if or (not $user) (not $gistID) -}}
+  {{- errorf "gist shortcode requires username and gist id: %s" .Position -}}
+{{- end -}}
+<div class="surface my-6 p-5 text-sm leading-7 text-muted-foreground">
+  <p class="font-semibold text-foreground">GitHub Gist</p>
+  <p class="mt-2">Offline mode does not load remote gist scripts.</p>
+  <p class="mt-3">
+    <a href="https://gist.github.com/{{ $user }}/{{ $gistID }}" class="text-primary hover:underline">Open the gist</a>
+  </p>
+  {{- if ne $file "" -}}
+  <p class="mt-2 text-xs">File: {{ $file }}</p>
+  {{- end -}}
+</div>
