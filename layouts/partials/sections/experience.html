@@ -38,7 +38,7 @@
                 <a href="{{ .url }}" target="_blank" class="ui-button-secondary !size-10 !p-0" title="{{ .tooltip }}"><i class="{{ .icon }}"></i></a>
                 {{ end }}
                 {{ range .featuredItems.customIcons }}
-                <a href="{{ .url }}" target="_blank" class="ui-button-secondary !size-10 !p-0" title="{{ .tooltip }}"><img src="{{ .icon }}" alt="" class="h-5 w-5"></a>
+                <a href="{{ .url }}" target="_blank" class="ui-button-secondary !size-10 !p-0" title="{{ .tooltip }}"><img src="{{ partial "helpers/url.html" .icon }}" alt="" class="h-5 w-5"></a>
                 {{ end }}
               </div>
               {{ end }}

@@ -1,0 +1,17 @@
+{{- /*
+  helpers/url.html
+  Usage: {{ partial "helpers/url.html" "path/or/url" }}
+
+  - Keeps absolute/external URLs unchanged
+  - Converts local paths to relURL so GitHub Pages subpaths work
+*/ -}}
+{{- $raw := . | default "" -}}
+{{- $rawLower := lower $raw -}}
+
+{{- if or (eq $raw "") (hasPrefix $rawLower "#") (hasPrefix $rawLower "mailto:") (hasPrefix $rawLower "tel:") -}}
+  {{- $raw -}}
+{{- else if or (hasPrefix $rawLower "http://") (hasPrefix $rawLower "https://") (hasPrefix $rawLower "//") (hasPrefix $rawLower "data:") -}}
+  {{- $raw -}}
+{{- else -}}
+  {{- $raw | strings.TrimPrefix "/" | relURL -}}
+{{- end -}}

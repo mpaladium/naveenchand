@@ -23,7 +23,7 @@
         </header>
         {{ if .Params.image }}
         <div class="mb-8 overflow-hidden rounded-[2rem] border border-border">
-          <img class="aspect-[16/8] w-full object-cover" src="{{ .Params.image }}" alt="{{ .Title }}">
+          <img class="aspect-[16/8] w-full object-cover" src="{{ partial "helpers/url.html" .Params.image }}" alt="{{ .Title }}">
         </div>
         {{ end }}
         <div class="content-prose">{{ .Content | emojify }}</div>

@@ -11,14 +11,14 @@
     <div class="grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)]">
       {{ if .Params.image }}
       <aside class="surface p-6">
-        <img src="{{ .Params.image }}" alt="{{ .Params.name }}" class="aspect-square w-full rounded-[2rem] object-cover">
+        <img src="{{ partial "helpers/url.html" .Params.image }}" alt="{{ .Params.name }}" class="aspect-square w-full rounded-[2rem] object-cover">
         <h1 class="mt-5 text-2xl font-semibold">{{ .Params.name }}</h1>
         <div class="mt-5 flex flex-wrap gap-3 text-lg">
           {{ range .Params.socialLinks.fontAwesomeIcons }}
           <a href="{{ .url }}" target="_blank" class="ui-button-secondary !size-11 !p-0"><i class="{{ .icon }}"></i></a>
           {{ end }}
           {{ range .Params.socialLinks.customIcons }}
-          <a href="{{ .url }}" target="_blank" class="ui-button-secondary !size-11 !p-0"><img src="{{ .icon }}" alt="" class="h-5 w-5"></a>
+          <a href="{{ .url }}" target="_blank" class="ui-button-secondary !size-11 !p-0"><img src="{{ partial "helpers/url.html" .icon }}" alt="" class="h-5 w-5"></a>
           {{ end }}
         </div>
       </aside>

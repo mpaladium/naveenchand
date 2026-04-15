@@ -17,7 +17,7 @@
       <article class="surface overflow-hidden">
         {{ if and (not (.Site.Params.listPages.disableFeaturedImage | default false)) (.Params.image) }}
         <a href="{{ .RelPermalink }}" class="block overflow-hidden">
-          <img src="{{ .Params.image }}" alt="{{ .Title }}" class="aspect-[16/10] w-full object-cover transition-transform duration-500 hover:scale-105">
+          <img src="{{ partial "helpers/url.html" .Params.image }}" alt="{{ .Title }}" class="aspect-[16/10] w-full object-cover transition-transform duration-500 hover:scale-105">
         </a>
         {{ end }}
         <div class="space-y-4 p-6">

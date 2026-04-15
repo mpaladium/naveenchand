@@ -18,7 +18,7 @@
 
           <div class="mt-8 flex flex-wrap gap-3">
             {{ if .Site.Params.hero.button.enable }}
-            <a href="{{ .Site.Params.hero.button.url }}" class="ui-button" {{ cond .Site.Params.hero.button.download "download" "" }} {{ if .Site.Params.hero.button.newPage | default true }}target="_blank"{{ end }}>{{ $hero.button.name | default .Site.Params.hero.button.name }}</a>
+            <a href="{{ partial "helpers/url.html" .Site.Params.hero.button.url }}" class="ui-button" {{ cond .Site.Params.hero.button.download "download" "" }} {{ if .Site.Params.hero.button.newPage | default true }}target="_blank"{{ end }}>{{ $hero.button.name | default .Site.Params.hero.button.name }}</a>
             {{ end }}
             <a href="#projects" class="ui-button-secondary">Explore Work</a>
           </div>
@@ -31,7 +31,7 @@
             {{ end }}
             {{ range .Site.Params.hero.socialLinks.customIcons }}
             <a href="{{ .url }}" {{ if not (hasPrefix .url "#") }}target="_blank"{{ end }} class="ui-button-secondary !size-11 !p-0">
-              <img src="{{ .icon }}" alt="" class="h-5 w-5">
+              <img src="{{ partial "helpers/url.html" .icon }}" alt="" class="h-5 w-5">
             </a>
             {{ end }}
           </div>
@@ -53,14 +53,14 @@
         </div>
 
         {{ if $showHeroImage }}
-        <div class="relative">
+        <div class="relative flex justify-center lg:justify-end">
           <div class="surface-muted relative overflow-hidden p-4 sm:p-6">
             <div class="absolute inset-x-6 top-6 flex items-center justify-between rounded-full border border-border/70 bg-background/75 px-4 py-2 text-xs text-muted-foreground backdrop-blur">
               <span>AI System State</span>
               <span class="flex items-center gap-2"><span class="inline-block size-2 rounded-full bg-primary"></span>online</span>
             </div>
             <div class="rounded-[2rem] border border-border/60 bg-background/70 p-4 pt-16">
-              <img src="{{ .Site.Params.hero.image }}" alt="{{ .Site.Params.title }} profile image" class="mx-auto aspect-square w-full max-w-md rounded-[1.75rem] object-cover {{ if .Site.Params.hero.roundImage }}rounded-full{{ end }}">
+              <img src="{{ partial "helpers/url.html" .Site.Params.hero.image }}" alt="{{ .Site.Params.title }} profile image" class="mx-auto aspect-square w-full max-w-md rounded-[1.75rem] object-cover {{ if .Site.Params.hero.roundImage }}rounded-full{{ end }}">
             </div>
             <div class="mt-4 grid gap-3 sm:grid-cols-2">
               <div class="rounded-[1.5rem] border border-border/70 bg-background/70 p-4">

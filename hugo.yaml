@@ -1,6 +1,6 @@
 baseURL: "https://hugo-profile.netlify.app"
 languageCode: "en-us"
-title: "Hugo Profile"
+title: "Naveen Chand"
 theme: hugo-profile
 
 # Multilingual configuration
@@ -318,7 +318,7 @@ languages:
               url: "https://example.com"
       projects:
         items:
-          - title: Hugo Profile
+          - title: Software Developer
             content: Un modèle Hugo hautement personnalisable et axé sur le mobile pour portfolio personnel et blog.
             image: /images/projects/profile.png
             featured:
@@ -513,7 +513,7 @@ params:
     enable: true
     showImage: true
     intro: "Hi, my name is"
-    title: "Naveen."
+    title: "Naveen Chand"
     subtitle: "AI/ML · Full-Stack · DevOps"
     content: "Full-stack AI & DevOps engineer building cloud-native systems, microservices, and LLM-based apps (RAG, vector search, embeddings)."
     image: /images/hero.svg
@@ -521,19 +521,19 @@ params:
       enable: true
     # roundImage: true # Make hero image circular | default false
     button:
-      enable: true
+      enable: false
       name: "Resume"
-      url: "#"
+      url: "/cv.pdf"
       download: true
       newPage: false
     socialLinks:
       fontAwesomeIcons:
         - icon: fab fa-github
-          url: https://example.com
+          url: https://github.com/mpaladium/README.md
 
-      customIcons:
-        - icon: /fav.png
-          url: "https://example.com"
+      # customIcons:
+      #   - icon: /fav.png
+      #     url: "https://example.com"
 
   # About
   about:
@@ -684,6 +684,7 @@ params:
   # projects
   projects:
     enable: true
+    showImages: false
     # title: "Custom Name"
     title: "Featured Projects"
     description: "A few recent builds across LLM/RAG, infrastructure, and data platforms."
@@ -696,7 +697,6 @@ params:
           link: https://demo.zukvik.org
         badges:
           - "Next.js"
-          - "Ollama"
           - "LangChain"
           - "RAG"
           - "python"
@@ -707,9 +707,9 @@ params:
       - title: HomeLab DevOps Infrastructure
         content: Secure self-hosted stack with Docker Compose, Headscale mesh networking, Traefik + Let’s Encrypt TLS automation.
         image: /images/projects/profile2.jpg
-        featured:
-          name: Details
-          link: "#"
+        # featured:
+        #   name: Details
+        #   link: "#"
         badges:
           - "Docker"
           - "Traefik"
@@ -723,23 +723,24 @@ params:
         content: Full-stack AI data platform with RAG chatbots, vector search, React dashboards, and Kubernetes deployment pipelines.
         image: /images/projects/converter.jpg
         featured:
-          name: Details
-          link: "#"
+          name: Demo
+          link: https://www.luciddatahub.com
+          # link: "#"
         badges:
           - "React"
           - "Kubernetes"
           - "RAG"
           - "Vector Search"
-        links:
-          - icon: fab fa-github
-            url: "https://www.luciddatahub.com"
+        # links:
+        #   - icon: fab fa-github
+        #     url: "https://www.luciddatahub.com"
 
       - title: Embedded IoT Systems (Atmontech)
         content: IoT sensor systems (NodeMCU + Raspberry Pi) with REST APIs, monitoring dashboards, and cloud platform evaluations.
         image: /images/projects/profile.png
-        featured:
-          name: Details
-          link: "#"
+        # featured:
+        #   name: Details
+        #   link: "#"
         badges:
           - "IoT"
           - "Raspberry Pi"

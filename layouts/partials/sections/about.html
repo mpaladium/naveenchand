@@ -10,7 +10,7 @@
     <div class="grid gap-8 {{ if $showAboutImage }}lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)]{{ else }}lg:grid-cols-1{{ end }}">
       {{ if $showAboutImage }}
       <div class="surface p-4">
-        <img src="{{ .Site.Params.about.image }}" alt="{{ .Site.Params.title }} profile picture" class="aspect-square w-full rounded-[2rem] object-cover">
+        <img src="{{ partial "helpers/url.html" .Site.Params.about.image }}" alt="{{ .Site.Params.title }} profile picture" class="aspect-square w-full rounded-[2rem] object-cover">
       </div>
       {{ end }}
       <div class="surface p-6 sm:p-8">

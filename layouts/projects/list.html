@@ -6,6 +6,7 @@
 {{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
 
 {{ define "main" }}
+{{- $projects := .Site.Language.Params.projects | default .Site.Params.projects -}}
 <section class="section-wrap">
   <div class="container-shell">
     <div class="section-heading">
@@ -15,9 +16,9 @@
     <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
       {{ range .Paginator.Pages }}
       <article class="surface overflow-hidden">
-        {{ if .Params.image }}
+        {{ if and ($projects.showImages | default true) (.Params.image) }}
         <a href="{{ .RelPermalink }}" class="block overflow-hidden">
-          <img src="{{ .Params.image }}" alt="{{ .Title }}" class="aspect-[16/10] w-full object-cover transition-transform duration-500 hover:scale-105">
+          <img src="{{ partial "helpers/url.html" .Params.image }}" alt="{{ .Title }}" class="aspect-[16/10] w-full object-cover transition-transform duration-500 hover:scale-105">
         </a>
         {{ end }}
         <div class="space-y-4 p-6">
