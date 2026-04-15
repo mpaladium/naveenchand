@@ -16,12 +16,12 @@
           <h2 class="mt-4 max-w-3xl text-balance text-2xl text-muted-foreground sm:text-3xl">{{ $hero.subtitle }}</h2>
           <p class="mt-6 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">{{ partial "utils/markdown-content.html" $hero.content }}</p>
 
-          <div class="mt-8 flex flex-wrap gap-3">
+          <!--<div class="mt-8 flex flex-wrap gap-3">
             {{ if .Site.Params.hero.button.enable }}
             <a href="{{ partial "helpers/url.html" .Site.Params.hero.button.url }}" class="ui-button" {{ cond .Site.Params.hero.button.download "download" "" }} {{ if .Site.Params.hero.button.newPage | default true }}target="_blank"{{ end }}>{{ $hero.button.name | default .Site.Params.hero.button.name }}</a>
             {{ end }}
             <a href="#projects" class="ui-button-secondary">Explore Work</a>
-          </div>
+          </div>-->
 
           <div class="mt-8 flex flex-wrap gap-3">
             {{ range .Site.Params.hero.socialLinks.fontAwesomeIcons }}
@@ -41,10 +41,10 @@
               <div class="text-3xl font-bold">{{ $projectCount }}+</div>
               <div class="mt-1 text-sm text-muted-foreground">Shipped builds</div>
             </div>
-            <div class="surface-muted p-4">
+            <!--<div class="surface-muted p-4">
               <div class="text-3xl font-bold">{{ $experienceCount }}</div>
               <div class="mt-1 text-sm text-muted-foreground">Experience blocks</div>
-            </div>
+            </div>-->
             <div class="surface-muted p-4">
               <div class="text-3xl font-bold">{{ $achievementCount }}</div>
               <div class="mt-1 text-sm text-muted-foreground">Key highlights</div>
@@ -52,7 +52,7 @@
           </div>
         </div>
 
-        {{ if $showHeroImage }}
+        <!--{{ if $showHeroImage }}
         <div class="relative flex justify-center lg:justify-end">
           <div class="surface-muted relative overflow-hidden p-4 sm:p-6">
             <div class="absolute inset-x-6 top-6 flex items-center justify-between rounded-full border border-border/70 bg-background/75 px-4 py-2 text-xs text-muted-foreground backdrop-blur">
@@ -76,7 +76,7 @@
             </div>
           </div>
         </div>
-        {{ end }}
+        {{ end }}-->
       </div>
     </div>
   </div>
