@@ -2,17 +2,18 @@
 
 *Aug 2020 – Present*
 
+- Developed IoT integration for industrial [leak detection systems](https://www.leak-reporter.com)
 - Built cloud-native SaaS platforms (Go, Java, React)
 - Led migration from Node.js → Go (+30% performance improvement)
-- Designed Kubernetes-based deployment & CI/CD pipelines
-- Developed IoT integration for industrial [leak detection systems](https://www.leak-reporter.com)
-- Built gRPC-based backend services for embedded Linux systems
+- End-to-end ownership of Kubernetes-based deployment & CI/CD pipelines with terraform, helm
+- Built gRPC-based backend services for embedded Linux systems 
 
 ## Lucid Datahub (Volunteer) — Full Stack / Data Platform Engineer
 
 *Jun 2023 – Oct 2025*
 
-- Built AI-driven data platform from scratch to production
+- Built AI-driven data platform
+- Architected frontend from scratch till B2B early adopters 
 - Designed RAG-based chatbot systems using LLMs
 - Built scalable React UI dashboards and APIs
 
