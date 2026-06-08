@@ -19,11 +19,14 @@
 
 ## Master’s Thesis — Predictive Analytics (RUL Estimation)
 
+*Jul 2018 – Mar 2019*
 - Built ML models (SVR, MLPRegressor) for predictive maintenance
 - Designed full ML pipeline using scikit-learn + Keras
 - Focused on Industry 4.0 predictive maintenance systems
 
 ## Atmontech — Co-founder / Workstudent (Early Career)
+
+*Aug 2017 – Mar 2018*
 
 - Built IoT + sensor-based pollution monitoring system
 - Developed REST APIs + Android integration

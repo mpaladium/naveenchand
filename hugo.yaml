@@ -546,6 +546,53 @@ params:
       enable: true
       title: "Core Skills"
       categories:
+        - name: "AI / ML / LLM Stack"
+          items:
+            - name: "Ollama (local inference)"
+              rating: 75
+            - name: "LangChain (RAG, agents)"
+              rating: 75
+            - name: "Embeddings & retrieval"
+              rating: 80
+            - name: Opik LLM Observability
+              rating: 50
+        - name: "Cloud & Platforms"
+          items:
+            - name: "Microsoft Azure"
+              rating: 75
+            - name: "AWS"
+              rating: 40
+        - name: "DevOps / Infrastructure"
+          items:
+            - name: "Docker"
+              rating: 85
+            - name: "Kubernetes"
+              rating: 75
+            - name: "Terraform"
+              rating: 60
+            - name: "Github CI/CD"
+              rating: 70
+            - name: "Traefik"
+              rating: 70
+            - name: Prometheus
+              rating: 60
+            - name: Grafana
+              rating: 60
+            # - name: "Caddy"
+            #   rating: 70
+            # - name: "Systemd"
+            #   rating: 70
+            - name: "Bash scripting"
+              rating: 65
+            # - name: "Headscale"
+            #   rating: 70
+
+        #     - name: "VPS / Self-hosted infrastructure"
+        #       rating: 85
+        #     - name: "Raspberry Pi (Edge / IoT)"
+        #       rating: 75
+        #     - name: "PetaLinux (Embedded Linux)"
+        #       rating: 60
         - name: "Programming Languages"
           items:
             - name: "Go"
@@ -583,40 +630,7 @@ params:
         #       rating: 85
         #     - name: "OpenAPI"
         #       rating: 85
-        - name: "DevOps / Infrastructure"
-          items:
-            - name: "Docker"
-              rating: 85
-            - name: "Kubernetes"
-              rating: 75
-            - name: "Terraform"
-              rating: 60
-            - name: "Github CI/CD"
-              rating: 70
-            - name: "Traefik"
-              rating: 70
-            - name: Prometheus
-              rating: 60
-            - nane: Grafana
-              rating: 60
-            # - name: "Caddy"
-            #   rating: 70
-            # - name: "Systemd"
-            #   rating: 70
-            - name: "Bash scripting"
-              rating: 60
-            # - name: "Headscale"
-            #   rating: 70
-        # - name: "Cloud & Platforms"
-        #   items:
-        #     - name: "Microsoft Azure"
-        #       rating: 75
-        #     - name: "VPS / Self-hosted infrastructure"
-        #       rating: 85
-        #     - name: "Raspberry Pi (Edge / IoT)"
-        #       rating: 75
-        #     - name: "PetaLinux (Embedded Linux)"
-        #       rating: 60
+
         - name: "Databases"
           items:
             - name: "PostgreSQL"
@@ -630,16 +644,6 @@ params:
             - name: "neo4j"
               rating: 40
 
-        - name: "AI / ML / LLM Stack"
-          items:
-            - name: "Ollama (local inference)"
-              rating: 75
-            - name: "LangChain (RAG, agents)"
-              rating: 75
-            - name: "Embeddings & retrieval"
-              rating: 80
-            - name: Opik LLM Observability
-              rating: 50
             # - name: "scikit-learn / Keras"
             #   rating: 70
             # - name: "RAG document chat"
@@ -695,6 +699,29 @@ params:
     title: "Featured Projects"
     description: "A few recent builds across LLM/RAG, infrastructure, and data platforms."
     items:
+      - title: llamastack
+        content: A simple shippable llamacpp stack to install on mac (intel or silicon) and Ubuntu/debian machines..
+        image: /images/projects/profile2.jpg
+        badges:
+          - "Plug 'n Play"
+          - "Local inference"
+          - "huggingFace"
+          - "bash systemd"
+        links:
+          - icon: fab fa-github
+            url: "https://github.com/mpaladium/llamastack"
+
+      - title: vLLMServer
+        content: Production-ready FastAPI server for LLM inference using vLLM with OpenAI-compatible endpoints. Supports concurrent requests, streaming responses, and optional text embeddings.
+        image: /images/projects/profile2.jpg
+        badges:
+          - "LLM Metrics & observability"
+          - "Production-hardened "
+          - "inference Engine"
+        links:
+          - icon: fab fa-github
+            url: "https://github.com/velospot/vLLMserver"
+
       - title: GRC AI Auditor
         content: AI-powered GRC (Governance, Risk, and Compliance) auditor. It combines semantic search, graph relationships, and LLM reasoning to generate evidence-backed insights, policy changes audit-ready summaries, and actionable recommendations
         image: /images/projects/profile.png
@@ -706,9 +733,9 @@ params:
           - "LangChain"
           - "RAG"
           - "python"
-        # links:
-        #   - icon: fab fa-github
-        #     url: "#"
+        links:
+          - icon: fab fa-github
+            url: "https://github.com/velospot/grc-policy-server"
 
       - title: Evolutionlab - DevOps Labs from Home
         content: EvolutionLab is my self-hosted mini-cloud — a living lab where a VPS, Raspberry Pis, and mini-PCs mesh together with Headscale and Traefik.
